@@ -54,5 +54,43 @@ string decimalToHex(int num) {
     if (negative) result = "-" + result;
     return result;
 }
+// Hexadecimal to Decimal
+int hexToDecimal(string s) {
+    string hexMap = "0123456789ABCDEF";
+    bool negative = false;
+    if (!s.empty() && s[0] == '-') {
+        negative = true;
+        s = s.substr(1);
+    }
+    for (char &c : s) c = toupper(c);
+
+    int value = 0;
+    for (char c : s) {
+        int digit = hexMap.find(c);
+        if (digit == string::npos) {
+            cout << "Invalid hex number\n";
+            return 0;
+        }
+        value = value * 16 + digit;
+    }
+    return negative ? -value : value;
+}
+
+void showMenu() {
+    cout << "\n--- MENU ---\n";
+    cout << "1. Decimal to Binary\n";
+    cout << "2. Binary to Decimal\n";
+    cout << "3. Hexadecimal to Decimal\n";
+    cout << "4. Decimal to Hexadecimal\n";
+    cout << "5. Demo (random number)\n";
+    cout << "6. Exit\n";
+}
+
+void demo() {
+    int n = rand() % 100;
+    cout << "Random number: " << n << "\n";
+    cout << "Binary: " << decimalToBinary(n) << "\n";
+    cout << "Hex: " << decimalToHex(n) << "\n";
+}
 
 
